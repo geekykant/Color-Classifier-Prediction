@@ -1,7 +1,13 @@
+let r, g, b;
+
 function setup() {
-	createCanvas(400, 300);
-	background(0,0,0);
+  createCanvas(200, 200);
+	setupBackgroundColor();
 }
 
-function draw() {
+function setupBackgroundColor() {
+  r = floor(random(256));
+  g = floor(random(256));
+  b = floor(random(256));
+  background(r, g, b);
 }
