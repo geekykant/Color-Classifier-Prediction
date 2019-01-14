@@ -8,3 +8,7 @@ body {
 canvas {
   margin:auto;
 }
+
+button{
+  display: inherit;
+}

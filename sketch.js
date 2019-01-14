@@ -2,10 +2,18 @@ let r, g, b;
 
 function setup() {
   createCanvas(200, 200);
-	setupBackgroundColor();
-	buttons = ['red-ish','blue-ish','yellow-ish','purple-ish','white-ish','green-ish'];
-	button = createButton('submit');
-	button.mousePressed(buttonClicked);
+  setupBackgroundColor();
+  let buttons = [];
+  buttons.push(createButton('red-ish'));
+  buttons.push(createButton('blue-ish'));
+  buttons.push(createButton('green-ish'));
+  buttons.push(createButton('purple-ish'));
+  buttons.push(createButton('white-ish'));
+  buttons.push(createButton('black-ish'));
+
+  for (var i = 0; i < buttons.length; i++) {
+    buttons[i].mousePressed(sendData);
+  }
 }
 
 function setupBackgroundColor() {
@@ -15,6 +23,6 @@ function setupBackgroundColor() {
   background(r, g, b);
 }
 
-function buttonClicked(){
-	setupBackgroundColor();
+function sendData() {
+  console.log(this.html())
 }
