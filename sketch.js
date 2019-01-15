@@ -1,6 +1,6 @@
 // Initialize Firebase
 var config = {
-  apiKey: "AIzaSyBWjFsIIjpmicV8Ku9EyCBGNNWaGQlGqV8",
+  apiKey: "###",
   authDomain: "colorclassifier-aabae.firebaseapp.com",
   databaseURL: "https://colorclassifier-aabae.firebaseio.com",
   projectId: "colorclassifier-aabae",
@@ -19,14 +19,48 @@ function setup() {
   buttons.push(createButton('red-ish'));
   buttons.push(createButton('blue-ish'));
   buttons.push(createButton('green-ish'));
-  buttons.push(createButton('purple-ish'));
+  buttons.push(createButton('violet-ish'));
   buttons.push(createButton('orange-ish'));
+  buttons.push(createButton('yellow-ish'));
   buttons.push(createButton('pink-ish'));
   buttons.push(createButton('brown-ish'));
 
   for (var i = 0; i < buttons.length; i++) {
     buttons[i].mousePressed(sendData);
   }
+
+  var ref2 = database.ref("colors");
+  ref2.on("value", gotData, errData);
+
+  function errData() {
+    console.log("error");
+  }
+
+  var count = {
+    'red-ish': 0,
+    'blue-ish': 0,
+    'green-ish': 0,
+    'violet-ish': 0,
+    'orange-ish': 0,
+    'yellow-ish': 0,
+    'pink-ish': 0,
+    'brown-ish': 0
+  }
+
+  function gotData(data) {
+    var colors = data.val();
+    // Grab the keys to iterate over the object
+    var keys = Object.keys(colors);
+
+    for (var i = 0; i < keys.length; i++) {
+      var key = keys[i];
+      var color = colors[key];
+      count[color['label']]++;
+    }
+    console.log(count);
+  }
+
+
 }
 
 function setupBackgroundColor() {
@@ -45,9 +79,10 @@ function sendData() {
   }
 
   var ref = database.ref('colors');
-  ref.push(data,finished);
+  ref.push(data, finished);
 
   console.log(data);
+
   function finished(error) {
     if (error) {
       console.log('ooops');
