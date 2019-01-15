@@ -18,7 +18,7 @@ function setup() {
   let buttons = [];
   buttons.push(createButton('red-ish'));
   buttons.push(createButton('green-ish'));
-  buttons.push(createButton('other');
+  buttons.push(createButton('other'));
 
   for (var i = 0; i < buttons.length; i++) {
     buttons[i].mousePressed(sendData);
