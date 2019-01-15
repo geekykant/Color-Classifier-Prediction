@@ -17,34 +17,24 @@ function setup() {
   setupBackgroundColor();
   let buttons = [];
   buttons.push(createButton('red-ish'));
-  buttons.push(createButton('blue-ish'));
   buttons.push(createButton('green-ish'));
-  buttons.push(createButton('violet-ish'));
-  buttons.push(createButton('orange-ish'));
-  buttons.push(createButton('yellow-ish'));
-  buttons.push(createButton('pink-ish'));
-  buttons.push(createButton('brown-ish'));
+  buttons.push(createButton('other');
 
   for (var i = 0; i < buttons.length; i++) {
     buttons[i].mousePressed(sendData);
   }
 
-  var ref2 = database.ref("colors");
-  ref2.on("value", gotData, errData);
-
-  function errData() {
-    console.log("error");
-  }
+  // var ref2 = database.ref("colors");
+  // ref2.on("value", gotData, errData);
 
   var count = {
     'red-ish': 0,
-    'blue-ish': 0,
     'green-ish': 0,
-    'violet-ish': 0,
-    'orange-ish': 0,
-    'yellow-ish': 0,
-    'pink-ish': 0,
-    'brown-ish': 0
+    'other': 0
+  }
+
+  function errData() {
+    console.log("error");
   }
 
   function gotData(data) {
@@ -59,8 +49,6 @@ function setup() {
     }
     console.log(count);
   }
-
-
 }
 
 function setupBackgroundColor() {
