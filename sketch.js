@@ -24,5 +24,13 @@ function setupBackgroundColor() {
 }
 
 function sendData() {
-  console.log(this.html())
+  let data = {
+    r: r,
+    g: g,
+    b: b,
+    label: this.html()
+  }
+
+  console.log(data);
+  setupBackgroundColor();
 }
