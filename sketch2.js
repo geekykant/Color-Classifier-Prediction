@@ -24,5 +24,14 @@ function setup() {
     labels.push(colorList.indexOf(record.label));
   }
 
-  console.log(labels);
+  let xs = tf.tensor2d(colors);
+
+  let labelsTensor = tf.tensor1d(labels,'int32');
+  let ys = tf.oneHot(labelsTensor,9)
+  labelsTensor.dispose();
+
+  xs.print();
+  ys.print();
+
+  // console.log(xs.shape);
 }
