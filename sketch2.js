@@ -1,6 +1,12 @@
 let data;
 let model;
 
+let xs, ys;
+
+let lossP;
+let labelP;
+let rSlider, gSlider, bSlider;
+
 function preload() {
   data = loadJSON('colorData.json');
 }
@@ -18,6 +24,14 @@ let colorList = [
 ]
 
 function setup() {
+  labelP = createP('Label');
+  lossP = createP('Loss');
+  rSlider = createSlider(0, 255, 255);
+  gSlider = createSlider(0, 255, 255);
+  bSlider = createSlider(0, 255, 0);
+
+  createCanvas(200, 200);
+
   let colors = [];
   let labels = [];
   for (let record of data.entries) {
@@ -25,14 +39,14 @@ function setup() {
     labels.push(colorList.indexOf(record.label));
   }
 
-  let xs = tf.tensor2d(colors);
+  xs = tf.tensor2d(colors);
 
   let labelsTensor = tf.tensor1d(labels, 'int32');
-  let ys = tf.oneHot(labelsTensor, 9)
+  ys = tf.oneHot(labelsTensor, 9)
   labelsTensor.dispose();
 
-  xs.print();
-  ys.print();
+  // xs.print();
+  // ys.print();
 
   model = tf.sequential();
 
@@ -58,13 +72,46 @@ function setup() {
     loss: 'categoricalCrossentropy'
   });
 
-  const options = {
-    epochs: 3
-  }
-
-  model.fit(xs, ys, options).then(results => {
+  train().then(results => {
     console.log(results.history.loss);
   });
-
   // console.log(xs.shape);
+}
+
+async function train() {
+  const options = {
+    epochs: 10,
+    validationSplit: 0.1,
+    shuffle: true,
+    callbacks: {
+      onTrainBegin: () => console.log("Training started"),
+      onTrainEnd: () => console.log("Traing End"),
+      onBatchEnd: tf.nextFrame,
+      onEpochEnd: (num, logs) => {
+        console.log('Epoch:' + num);
+        lossP.html('Loss: ' + logs.val_loss);
+        // console.log('Loss: ' + logs.loss);
+      }
+    }
+  }
+  
+  return await model.fit(xs, ys, options);
+}
+
+
+function draw() {
+  let r = rSlider.value();
+  let g = gSlider.value();
+  let b = bSlider.value();
+  background(r, g, b);
+
+  const xs = tf.tensor2d([
+    [r / 255, g / 255, b / 255]
+  ]);
+
+  let results = model.predict(xs);
+  let index = results.argMax(1).dataSync()[0];
+
+  let label = colorList[index];
+  labelP.html(label);
 }
