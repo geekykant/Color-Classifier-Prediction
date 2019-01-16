@@ -94,7 +94,7 @@ async function train() {
       }
     }
   }
-  
+
   return await model.fit(xs, ys, options);
 }
 
@@ -105,13 +105,15 @@ function draw() {
   let b = bSlider.value();
   background(r, g, b);
 
-  const xs = tf.tensor2d([
-    [r / 255, g / 255, b / 255]
-  ]);
+  tf.tidy(() => {
+    const xs = tf.tensor2d([
+      [r / 255, g / 255, b / 255]
+    ]);
 
-  let results = model.predict(xs);
-  let index = results.argMax(1).dataSync()[0];
+    let results = model.predict(xs);
+    let index = results.argMax(1).dataSync()[0];
 
-  let label = colorList[index];
-  labelP.html(label);
+    let label = colorList[index];
+    labelP.html(label);
+  });
 }
