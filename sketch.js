@@ -1,6 +1,6 @@
 // Initialize Firebase
 var config = {
-  apiKey: "###",
+  apiKey: "AIzaSyBWjFsIIjpmicV8Ku9EyCBGNNWaGQlGqV8",
   authDomain: "colorclassifier-aabae.firebaseapp.com",
   databaseURL: "https://colorclassifier-aabae.firebaseio.com",
   projectId: "colorclassifier-aabae",
@@ -17,8 +17,13 @@ function setup() {
   setupBackgroundColor();
   let buttons = [];
   buttons.push(createButton('red-ish'));
+  buttons.push(createButton('blue-ish'));
   buttons.push(createButton('green-ish'));
-  buttons.push(createButton('other'));
+  buttons.push(createButton('violet-ish'));
+  buttons.push(createButton('orange-ish'));
+  buttons.push(createButton('yellow-ish'));
+  buttons.push(createButton('pink-ish'));
+  buttons.push(createButton('brown-ish'));
 
   for (var i = 0; i < buttons.length; i++) {
     buttons[i].mousePressed(sendData);
@@ -29,8 +34,13 @@ function setup() {
 
   var count = {
     'red-ish': 0,
+    'blue-ish': 0,
     'green-ish': 0,
-    'other': 0
+    'violet-ish': 0,
+    'orange-ish': 0,
+    'yellow-ish': 0,
+    'pink-ish': 0,
+    'brown-ish': 0
   }
 
   function errData() {
