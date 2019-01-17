@@ -24,13 +24,16 @@ let colorList = [
 ]
 
 function setup() {
+  createCanvas(200, 200);
+
   labelP = createP('Label');
   lossP = createP('Loss');
+
   rSlider = createSlider(0, 255, 255);
   gSlider = createSlider(0, 255, 255);
   bSlider = createSlider(0, 255, 0);
 
-  createCanvas(200, 200);
+
 
   let colors = [];
   let labels = [];
