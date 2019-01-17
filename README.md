@@ -6,6 +6,8 @@ This is going to be a simple website that has a toggle between differnt R,G,B co
 - Tensorflow JS
 - DOM JS
 
+<img src="https://github.com/geekykant/Color-Classifier-Prediction/blob/master/ouput/output.gif?raw=true">
+
 ## Features
 - Color generation using RGB slider and storing to database.
 - Database filtering and state redundant reduction
