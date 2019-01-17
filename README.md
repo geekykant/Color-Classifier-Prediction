@@ -11,5 +11,5 @@ This is going to be a simple website that has a toggle between differnt R,G,B co
 ## Features
 - Color generation using RGB slider and storing to database.
 - Database filtering and state redundant reduction
-- Building Tensorflow model and training with the dataset 70/30
+- Building Tensorflow model and training with the dataset 80/20
 - Output as redish, greenish, purplish, bluish
