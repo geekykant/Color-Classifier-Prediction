@@ -13,3 +13,4 @@ This is going to be a simple website that has a toggle between differnt R,G,B co
 - Database filtering and state redundant reduction
 - Building Tensorflow model and training with the dataset 80/20
 - Output as redish, greenish, purplish, bluish
+- More nodes value are regenerated with learning
